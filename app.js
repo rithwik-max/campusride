@@ -147,4 +147,4 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`CampusRide running on http://localhost:${PORT}`));
+server.listen(PORT, "0.0.0.0", () => console.log(`CampusRide running on port ${PORT}`));
