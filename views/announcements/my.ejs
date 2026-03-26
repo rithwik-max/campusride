@@ -1,0 +1,95 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title">🗂️ My Rides</h1>
+    <p class="page-subtitle">Manage your ride announcements and incoming requests</p>
+  </div>
+  <a href="/announcements/new" class="btn btn-primary">
+    <i class="bi bi-plus-circle-fill"></i> New Ride
+  </a>
+</div>
+
+<% if (announcements.length === 0) { %>
+  <div class="glass-card empty-state">
+    <div class="empty-icon">📭</div>
+    <p class="empty-text">You haven't posted any ride announcements yet.</p>
+    <a href="/announcements/new" class="btn btn-primary">Post Your First Ride</a>
+  </div>
+<% } %>
+
+<% for (let ann of announcements) { %>
+<div class="glass-card my-ann-card">
+  <div class="my-ann-header">
+    <div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="ann-destination" style="font-family:var(--font-head); font-size:1.1rem; font-weight:700;">
+          <i class="bi bi-geo-alt-fill" style="color:var(--accent2);"></i> <%= ann.destination %>
+        </span>
+        <span class="ann-mode mode-<%= ann.mode %>"><%= ann.mode %></span>
+      </div>
+      <div class="ann-meta" style="margin-top:8px; margin-bottom:0;">
+        <span class="ann-meta-item"><i class="bi bi-calendar3"></i>
+          <%= new Date(ann.travelDate).toLocaleDateString('en-IN', {day:'numeric',month:'short'}) %>
+        </span>
+        <span class="ann-meta-item"><i class="bi bi-clock"></i> <%= ann.travelTime %></span>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+      <% if (ann.isActive) { %>
+        <span class="status-active"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i> Active</span>
+        <form action="/announcements/<%= ann._id %>/close" method="POST">
+          <button class="btn btn-danger btn-sm">
+            <i class="bi bi-x-circle"></i> Close
+          </button>
+        </form>
+      <% } else { %>
+        <span class="status-closed"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i> Closed</span>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="requests-section">
+    <div class="requests-title">
+      <i class="bi bi-person-raised-hand"></i>
+      Join Requests (<%= ann.requests.length %>)
+    </div>
+
+    <% if (ann.requests.length === 0) { %>
+      <p style="font-size:0.84rem; color:var(--text-muted);">No requests yet.</p>
+    <% } %>
+
+    <% for (let req of ann.requests) { %>
+    <div class="request-item">
+      <div class="ann-creator" style="margin-bottom:0;">
+        <div class="creator-dot" style="width:32px;height:32px;font-size:0.85rem;">
+          <%= req.name ? req.name[0].toUpperCase() : '?' %>
+        </div>
+        <div class="request-info">
+          <span class="request-name"><%= req.name %></span>
+          <% if (req.user) { %>
+            <span class="request-sub"><%= req.user.rollNumber %> • <%= req.user.phone %></span>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="request-actions">
+        <% if (req.status === 'pending' && ann.isActive) { %>
+          <form action="/announcements/<%= ann._id %>/accept/<%= req._id %>" method="POST" style="display:inline;">
+            <button class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i> Accept</button>
+          </form>
+          <form action="/announcements/<%= ann._id %>/reject/<%= req._id %>" method="POST" style="display:inline;">
+            <button class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i> Reject</button>
+          </form>
+        <% } else { %>
+          <span class="status-badge badge-<%= req.status %>">
+            <%= req.status.charAt(0).toUpperCase() + req.status.slice(1) %>
+          </span>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+</div>
+<% } %>

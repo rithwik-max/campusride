@@ -1,0 +1,60 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title">📢 Post a Ride</h1>
+    <p class="page-subtitle">Let others know you're heading out — share the auto/bus fare!</p>
+  </div>
+  <a href="/announcements" class="btn btn-ghost"><i class="bi bi-arrow-left"></i> Back</a>
+</div>
+
+<div class="glass-card post-card">
+  <form action="/announcements/new" method="POST">
+
+    <div class="form-group">
+      <label class="form-label">Destination</label>
+      <input type="text" name="destination" class="form-input" placeholder="e.g., Railway Station, Bus Stand, Airport" required />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Travel Date</label>
+        <input type="date" name="travelDate" class="form-input" required
+          min="<%= new Date().toISOString().split('T')[0] %>" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Travel Time</label>
+        <input type="time" name="travelTime" class="form-input" required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Mode of Transport</label>
+        <select name="mode" class="form-input" required>
+          <option value="">Select mode...</option>
+          <option value="auto">🛺 Auto</option>
+          <option value="bus">🚌 Bus</option>
+          <option value="shared-cab">🚗 Shared Cab</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Seats Available</label>
+        <input type="number" name="seatsAvailable" class="form-input" placeholder="e.g. 2" min="1" max="10" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Note (optional)</label>
+      <input type="text" name="note" class="form-input" placeholder="e.g., Will meet at college gate at 1:45 PM" maxlength="200" />
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:8px;">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-megaphone-fill"></i> Post Announcement
+      </button>
+      <a href="/announcements" class="btn btn-ghost">Cancel</a>
+    </div>
+
+  </form>
+</div>

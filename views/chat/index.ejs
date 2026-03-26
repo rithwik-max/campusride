@@ -1,0 +1,42 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title">💬 My Chats</h1>
+    <p class="page-subtitle">Active chat sessions with your travel buddies</p>
+  </div>
+</div>
+
+<% if (sessions.length === 0) { %>
+  <div class="glass-card empty-state">
+    <div class="empty-icon">💬</div>
+    <p class="empty-text">No active chat sessions yet. Accept or get accepted on a ride request!</p>
+    <a href="/announcements" class="btn btn-primary">Browse Rides</a>
+  </div>
+<% } %>
+
+<% for (let s of sessions) { %>
+  <%
+    const isExpired = new Date() > new Date(s.expiresAt);
+    const others = s.participants.filter(p => p._id.toString() !== currentUser._id.toString());
+  %>
+  <div class="glass-card chat-session-item">
+    <div class="session-info">
+      <h4>
+        <i class="bi bi-geo-alt-fill" style="color:var(--accent2);"></i>
+        <%= s.announcement ? s.announcement.destination : 'Ride' %>
+      </h4>
+      <p>
+        With: <%= others.map(o => o.name).join(', ') || 'Participants' %>
+      </p>
+      <% if (isExpired) { %>
+        <span class="session-expired"><i class="bi bi-clock-history"></i> Chat Expired (24hr limit)</span>
+      <% } else { %>
+        <span class="session-active"><i class="bi bi-circle-fill" style="font-size:0.45rem;"></i> Active</span>
+      <% } %>
+    </div>
+    <a href="/chat/<%= s._id %>" class="btn <%= isExpired ? 'btn-ghost' : 'btn-primary' %> btn-sm">
+      <i class="bi bi-chat-dots-fill"></i> <%= isExpired ? 'View' : 'Open' %>
+    </a>
+  </div>
+<% } %>

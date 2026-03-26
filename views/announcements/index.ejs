@@ -1,0 +1,95 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="page-header">
+  <div>
+    <h1 class="page-title">🚉 Ride Board</h1>
+    <p class="page-subtitle">Find a travel buddy heading to the railway station</p>
+  </div>
+  <a href="/announcements/new" class="btn btn-primary">
+    <i class="bi bi-plus-circle-fill"></i> Post a Ride
+  </a>
+</div>
+
+<% if (announcements.length === 0) { %>
+  <div class="glass-card empty-state">
+    <div class="empty-icon">🚌</div>
+    <p class="empty-text">No active ride announcements right now.</p>
+    <a href="/announcements/new" class="btn btn-primary">Be the first to post!</a>
+  </div>
+<% } else { %>
+  <div class="ann-grid">
+    <% for (let ann of announcements) { %>
+    <div class="glass-card ann-card">
+
+      <div class="ann-top">
+        <div class="ann-destination">
+          <i class="bi bi-geo-alt-fill" style="color:var(--accent2);"></i>
+          <%= ann.destination %>
+        </div>
+        <span class="ann-mode mode-<%= ann.mode %>">
+          <% if(ann.mode === 'auto') { %><i class="bi bi-taxi-front"></i><% } %>
+          <% if(ann.mode === 'bus') { %><i class="bi bi-bus-front"></i><% } %>
+          <% if(ann.mode === 'shared-cab') { %><i class="bi bi-car-front"></i><% } %>
+          <%= ann.mode %>
+        </span>
+      </div>
+
+      <div class="ann-meta">
+        <span class="ann-meta-item">
+          <i class="bi bi-calendar3"></i>
+          <%= new Date(ann.travelDate).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) %>
+        </span>
+        <span class="ann-meta-item">
+          <i class="bi bi-clock"></i>
+          <%= ann.travelTime %>
+        </span>
+      </div>
+
+      <div class="seats-badge">
+        <i class="bi bi-people-fill"></i>
+        <%= ann.seatsAvailable %> seat<%= ann.seatsAvailable > 1 ? 's' : '' %> available
+      </div>
+
+      <div class="ann-creator">
+        <div class="creator-dot"><%= ann.creator.name[0].toUpperCase() %></div>
+        <div class="creator-info">
+          <div class="creator-name"><%= ann.creator.name %></div>
+          <div class="creator-roll"><%= ann.creator.rollNumber %></div>
+        </div>
+      </div>
+
+      <% if (ann.note) { %>
+        <div class="ann-note">"<%= ann.note %>"</div>
+      <% } %>
+
+      <div class="ann-actions">
+        <% if (ann.creator._id.toString() !== currentUser._id.toString()) { %>
+          <%
+            const myReq = ann.requests.find(r => r.user && r.user.toString() === currentUser._id.toString());
+          %>
+          <% if (!myReq) { %>
+            <form action="/announcements/<%= ann._id %>/request" method="POST">
+              <button class="btn btn-primary btn-sm">
+                <i class="bi bi-hand-thumbs-up-fill"></i> Request to Join
+              </button>
+            </form>
+          <% } else if (myReq.status === 'pending') { %>
+            <span class="status-badge badge-pending"><i class="bi bi-hourglass-split"></i> Request Pending</span>
+          <% } else if (myReq.status === 'accepted') { %>
+            <a href="/chat" class="btn btn-success btn-sm">
+              <i class="bi bi-chat-dots-fill"></i> Open Chat
+            </a>
+          <% } else { %>
+            <span class="status-badge badge-rejected"><i class="bi bi-x-circle"></i> Request Declined</span>
+          <% } %>
+        <% } else { %>
+          <span style="font-size:0.82rem; color:var(--text-muted);">
+            <i class="bi bi-person-check-fill"></i> Your announcement
+          </span>
+        <% } %>
+      </div>
+
+    </div>
+    <% } %>
+  </div>
+<% } %>

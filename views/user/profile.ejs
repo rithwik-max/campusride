@@ -1,0 +1,43 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="page-header">
+  <h1 class="page-title">👤 My Profile</h1>
+</div>
+
+<div class="glass-card profile-card">
+  <div class="profile-avatar">
+    <%= currentUser.name[0].toUpperCase() %>
+  </div>
+  <div class="profile-name"><%= currentUser.name %></div>
+  <div class="profile-roll"><%= currentUser.rollNumber %></div>
+
+  <div class="profile-details">
+    <div class="profile-row">
+      <span class="profile-label"><i class="bi bi-envelope-fill"></i> Email</span>
+      <span class="profile-value"><%= currentUser.email %></span>
+    </div>
+    <div class="profile-row">
+      <span class="profile-label"><i class="bi bi-phone-fill"></i> Phone</span>
+      <span class="profile-value"><%= currentUser.phone %></span>
+    </div>
+    <div class="profile-row">
+      <span class="profile-label"><i class="bi bi-person-badge-fill"></i> Roll No.</span>
+      <span class="profile-value"><%= currentUser.rollNumber %></span>
+    </div>
+    <div class="profile-row">
+      <span class="profile-label"><i class="bi bi-calendar-check-fill"></i> Joined</span>
+      <span class="profile-value">
+        <%= new Date(currentUser.createdAt).toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'}) %>
+      </span>
+    </div>
+  </div>
+
+  <div style="margin-top:28px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="/announcements" class="btn btn-primary">
+      <i class="bi bi-grid-fill"></i> View Ride Board
+    </a>
+    <a href="/logout" class="btn btn-danger">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+  </div>
+</div>

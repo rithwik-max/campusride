@@ -1,0 +1,12 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="error-wrapper">
+  <div style="text-align:center;">
+    <div class="error-code"><%= code || 500 %></div>
+    <div style="font-family:var(--font-head); font-size:1.8rem; font-weight:800; margin-bottom:10px;">Oops!</div>
+    <p class="error-msg"><%= message || "Something went wrong." %></p>
+    <a href="/announcements" class="btn btn-primary">
+      <i class="bi bi-house-fill"></i> Go Home
+    </a>
+  </div>
+</div>
