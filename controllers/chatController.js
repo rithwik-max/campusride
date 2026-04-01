@@ -1,7 +1,6 @@
 const ChatSession = require("../models/ChatSession");
 const ChatMessage = require("../models/ChatMessage");
 
-// Auto numbers for Hyderabad/college area autos
 const AUTO_CONTACTS = [
   { name: "Raju Auto", number: "9876543210" },
   { name: "Suresh Auto", number: "9845678901" },
