@@ -2,18 +2,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --glass: rgba(255,255,255,0.10);
-  --glass-border: rgba(255,255,255,0.18);
-  --glass-hover: rgba(255,255,255,0.16);
-  --glass-strong: rgba(255,255,255,0.20);
-  --accent: #6C63FF;
-  --accent2: #FF6B9D;
-  --accent3: #43E97B;
-  --text: #f0f0f8;
-  --text-muted: rgba(240,240,248,0.55);
-  --danger: #ff4d6d;
-  --success: #43e97b;
-  --shadow: 0 8px 32px rgba(0,0,0,0.35);
+  --glass: rgba(255,255,255,0.08);
+  --glass-border: rgba(34,197,94,0.18);
+  --glass-hover: rgba(34,197,94,0.12);
+  --glass-strong: rgba(34,197,94,0.20);
+  --accent: #22c55e;
+  --accent2: #16a34a;
+  --accent3: #4ade80;
+  --text: #f8fafc;
+  --text-muted: rgba(255,255,255,0.65);
+  --danger: #ef4444;
+  --success: #22c55e;
+  --shadow: 0 8px 32px rgba(0,0,0,0.45);
   --radius: 18px;
   --radius-sm: 10px;
   --font-head: 'Syne', sans-serif;
@@ -26,7 +26,7 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   min-height: 100vh;
-  background: #0a0a1a;
+  background: #000000;
   overflow-x: hidden;
   position: relative;
 }
@@ -40,9 +40,9 @@ body {
   opacity: 0.55;
   animation: blobFloat 12s ease-in-out infinite alternate;
 }
-.blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #6C63FF, #a855f7); top: -100px; left: -100px; animation-delay: 0s; }
-.blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #FF6B9D, #f97316); bottom: -80px; right: -80px; animation-delay: -4s; }
-.blob-3 { width: 350px; height: 350px; background: radial-gradient(circle, #43E97B, #06b6d4); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -8s; }
+.blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #22c55e, #14532d); top: -100px; left: -100px; animation-delay: 0s; }
+.blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #16a34a, #14532d); bottom: -80px; right: -80px; animation-delay: -4s; }
+.blob-3 { width: 350px; height: 350px; background: radial-gradient(circle, #4ade80, #16a34a); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -8s; }
 @keyframes blobFloat {
   0% { transform: scale(1) translate(0,0); }
   100% { transform: scale(1.15) translate(30px, -30px); }
@@ -130,7 +130,7 @@ body {
 }
 .auth-logo h1 {
   font-family: var(--font-head); font-size: 1.9rem; font-weight: 800;
-  background: linear-gradient(135deg, #6C63FF, #FF6B9D);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -159,7 +159,7 @@ body {
   background: rgba(108,99,255,0.1);
   box-shadow: 0 0 0 3px rgba(108,99,255,0.15);
 }
-select.form-input option { background: #1a1a2e; color: var(--text); }
+select.form-input option { background: #111111; color: var(--text); }
 
 /* ===== BUTTONS ===== */
 .btn {
@@ -172,19 +172,19 @@ select.form-input option { background: #1a1a2e; color: var(--text); }
   touch-action: manipulation;
 }
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  background: linear-gradient(135deg, var(--accent), #15803d);
   color: #fff;
   box-shadow: 0 4px 20px rgba(108,99,255,0.4);
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(108,99,255,0.5); }
 .btn-accent2 {
-  background: linear-gradient(135deg, var(--accent2), #f97316);
+  background: linear-gradient(135deg, var(--accent2), #14532d);
   color: #fff; box-shadow: 0 4px 20px rgba(255,107,157,0.35);
 }
 .btn-accent2:hover { transform: translateY(-2px); }
 .btn-success {
   background: linear-gradient(135deg, #43e97b, #38f9d7);
-  color: #0a0a1a; box-shadow: 0 4px 16px rgba(67,233,123,0.35);
+  color: #000000; box-shadow: 0 4px 16px rgba(67,233,123,0.35);
 }
 .btn-success:hover { transform: translateY(-2px); }
 .btn-danger {
@@ -233,9 +233,9 @@ select.form-input option { background: #1a1a2e; color: var(--text); }
   padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
   flex-shrink: 0;
 }
-.mode-auto { background: rgba(108,99,255,0.2); color: #a78bfa; border: 1px solid rgba(108,99,255,0.3); }
-.mode-bus { background: rgba(67,233,123,0.15); color: #6ee7b7; border: 1px solid rgba(67,233,123,0.25); }
-.mode-shared-cab { background: rgba(255,107,157,0.15); color: #fba4c0; border: 1px solid rgba(255,107,157,0.25); }
+.mode-auto { background: rgba(108,99,255,0.2); color: #86efac; border: 1px solid rgba(108,99,255,0.3); }
+.mode-bus { background: rgba(67,233,123,0.15); color: #86efac; border: 1px solid rgba(67,233,123,0.25); }
+.mode-shared-cab { background: rgba(255,107,157,0.15); color: #86efac; border: 1px solid rgba(255,107,157,0.25); }
 .ann-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
 .ann-meta-item {
   display: flex; align-items: center; gap: 5px;
@@ -334,7 +334,7 @@ select.form-input option { background: #1a1a2e; color: var(--text); }
   word-break: break-word;
 }
 .msg-bubble.me .msg-content {
-  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  background: linear-gradient(135deg, var(--accent), #15803d);
   color: #fff; border-bottom-right-radius: 4px;
 }
 .msg-bubble.other .msg-content {
@@ -358,7 +358,7 @@ select.form-input option { background: #1a1a2e; color: var(--text); }
 .chat-input::placeholder { color: var(--text-muted); }
 .chat-send-btn {
   width: 42px; height: 42px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  background: linear-gradient(135deg, var(--accent), #15803d);
   border: none; color: #fff; font-size: 1rem;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -394,7 +394,7 @@ select.form-input option { background: #1a1a2e; color: var(--text); }
 .participant-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .participant-chip {
   padding: 4px 12px; border-radius: 50px; font-size: 0.78rem;
-  background: rgba(108,99,255,0.15); color: #a78bfa;
+  background: rgba(108,99,255,0.15); color: #86efac;
   border: 1px solid rgba(108,99,255,0.25);
 }
 
