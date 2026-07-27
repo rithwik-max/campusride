@@ -6,7 +6,7 @@
 
 <div class="page-header" style="margin-bottom:16px;">
   <div>
-    <h1 class="page-title" style="font-size:1.4rem;">💬 Chat Room</h1>
+    <h1 class="page-title" style="font-size:1.4rem;"> Chat Room</h1>
     <p class="page-subtitle">Session expires 24 hrs after creation</p>
   </div>
   <a href="/chat" class="btn btn-ghost btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
@@ -19,7 +19,7 @@
 
     <div class="chat-header">
       <div class="chat-header-info">
-        <h3>🚉 Travel Group Chat</h3>
+        <h3> Travel Group Chat</h3>
         <div class="participant-list">
           <% for (let p of session.participants) { %>
             <span class="participant-chip">
@@ -85,10 +85,10 @@
       </p>
       <% for (let a of autoContacts) { %>
         <div class="auto-item">
-          <span class="auto-icon">🛺</span>
+          <span class="auto-icon"></span>
           <div>
             <div class="auto-name"><%= a.name %></div>
-            <div class="auto-num">📞 <%= a.number %></div>
+            <div class="auto-num"> <%= a.number %></div>
           </div>
         </div>
       <% } %>
@@ -98,7 +98,7 @@
     </div>
 
     <div class="glass-card auto-panel">
-      <h4>ℹ️ Session Info</h4>
+      <h4> Session Info</h4>
       <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;">
         <div><i class="bi bi-clock" style="color:var(--accent);"></i> Expires: <%= new Date(session.expiresAt).toLocaleString('en-IN') %></div>
         <div style="margin-top:6px;"><i class="bi bi-shield-lock" style="color:var(--accent2);"></i> Chat auto-locks after 24 hours</div>
